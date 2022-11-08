@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/Context";
 import Comments from "./Comments/Comments";
 import InsertReview from "./InsertReview/InsertReview";
 import Ratings from "./Rating&Review/Ratings";
 
 const ServiceDetails = () => {
+  const {user} = useContext(AuthContext);
+
   return (
     <div>
       <section className="dark:bg-gray-800 dark:text-gray-100">
@@ -39,15 +43,21 @@ const ServiceDetails = () => {
             <Comments></Comments>
           </div>
 
-          <div className="flex justify-center">
+          {
+            user&&user.uid?<div className="flex justify-center">
             <InsertReview></InsertReview>
           </div>
-
+          :
           <div  className="flex justify-center">
-            <button class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
-            Please login to add a review
+            <button className="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+             Please login to add a review
             </button>
           </div>
+          }
+
+          
+
+          
         </div>
       </section>
     </div>

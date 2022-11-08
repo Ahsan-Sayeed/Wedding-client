@@ -216,7 +216,7 @@ const MyReviews = () => {
               <span itemprop="name">Leroy Jenkins</span>
             </a>
             on
-            <time datetime="2021-02-12 15:34:18-0200">Feb 12th 2021</time>
+            <time dateTime="2021-02-12 15:34:18-0200">Feb 12th 2021</time>
           </p>
         </div>
         <div className="dark:text-gray-100">

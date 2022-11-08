@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Context/Context";
 
 const NavigationBar = () => {
+  const {user,logOut} = useContext(AuthContext);
+  console.log(user);
+  const handleLogOut = () =>{
+    logOut()
+    .then(()=>{
+      alert('succesfully logged out');
+    })
+    .catch(err=>{
+      alert('something went wrong');
+    });
+  }
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -18,7 +30,7 @@ const NavigationBar = () => {
             <NavLink to="/blog">Blogs</NavLink>
           </li>
           <li>
-            <NavLink to="/service" className="justify-between">
+            <NavLink to="/service" className={`justify-between ${!(user&&user.uid)&&'hidden'}`}>
               Add Service
               <span className="animate-bounce indicator-item badge badge-secondary">
                 99+
@@ -26,11 +38,16 @@ const NavigationBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/review">My Reviews</NavLink>
+            <NavLink to="/review" className={`${!(user&&user.uid)&&'hidden'}`}>My Reviews</NavLink>
           </li>
-          <li>
+          {
+            user===null?<li>
             <NavLink to="/login">Login</NavLink>
+          </li>:<li>
+          <button className="btn btn-outline" onClick={handleLogOut}>LogOut</button>
           </li>
+          }
+          
         </ul>
       </div>
       {/* ===Menu bar== */}
@@ -64,17 +81,21 @@ const NavigationBar = () => {
             <Link to="/blog">blog</Link>
           </li>
           <li>
-            <Link to="/service" className="justify-between">
+            <Link to="/service" className={`justify-between ${!(user&&user.uid)&&'hidden'}`}>
               Add Service
               <span className="indicator-item badge badge-secondary">99+</span>
             </Link>
           </li>
           <li>
-            <Link to="/review">My Reviews</Link>
+            <Link to="/review" className={`${!(user&&user.uid)&&'hidden'}`}>My Reviews</Link>
           </li>
-          <li>
-            <a>Logout</a>
+          {
+            user===null?<li>
+            <NavLink to="/login">Login</NavLink>
+          </li>:<li>
+          <button className="btn btn-outline" onClick={handleLogOut}>LogOut</button>
           </li>
+          }
         </ul>
       </div>
     </div>

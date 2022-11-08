@@ -21,7 +21,7 @@ const Comments = () => {
                 </div>
               </div>
               <time
-                datetime=""
+                dateTime=""
                 className="row-start-1 mb-1 md:col-start-1 xl:col-span-2 dark:text-gray-400"
               >
                 Oct 13, 2020

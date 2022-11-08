@@ -9,6 +9,8 @@ import NotFound from '../Pages/NotFound/NotFound';
 import Register from '../Pages/Register/Register';
 import ServiceDetails from '../Pages/ServiceDetails/ServiceDetails';
 import ServicePage from '../Pages/ServicePage/ServicePage';
+import ServicesPage from '../Pages/ServicesPage/ServicesPage';
+import PrivateRoute from './PrivateRoute';
 
 const Route = createBrowserRouter([
     {
@@ -33,15 +35,19 @@ const Route = createBrowserRouter([
             },
             {
                 path:'/service',
-                element: <ServicePage/>
+                element: <PrivateRoute><ServicePage/></PrivateRoute>
+            },
+            {
+                path:'/services',
+                element: <ServicesPage/>
             },
             {
                 path:'/services/:id',
-                element: <ServiceDetails></ServiceDetails>
+                element: <ServiceDetails/>
             },
             {
                 path:'/review',
-                element: <MyReviews/>
+                element: <PrivateRoute><MyReviews/></PrivateRoute>
             }
         ]
     },

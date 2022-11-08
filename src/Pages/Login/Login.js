@@ -1,9 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Context/Context";
 
 const Login = () => {
+  const {signInWithEmail} = useContext(AuthContext);
+  const [wrong,setWrong] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const To = location?.state?.from || '/';
+
+  const handleSignIn = (e) =>{
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    signInWithEmail(email,password)
+    .then(({user})=>{
+      if(user&&user.uid){
+        alert('succesfully logged in');
+        navigate(To,{replace:true});
+      }
+      else{
+        alert("please try again later");
+      }
+    })
+    .catch(err=>{
+      if(err.message==="Firebase: Error (auth/wrong-password)."){
+       setWrong("Wrong password");
+      }
+      else{
+        alert("something went wrong please try agein later");
+      }
+    })
+    
+  }
+
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex md:flex-row flex-col justify-center items-center my-10">
       <div className="hero-content flex-col lg:flex-row-reverse max-w-md">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Login now!</h1>
@@ -18,22 +50,23 @@ const Login = () => {
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 shadow-2xl">
         <h1 className="text-2xl font-bold text-center">Login</h1>
         <form
-          novalidate=""
+          noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
+          onSubmit={handleSignIn}
         >
           <div className="space-y-1 text-sm">
-          <label for="username" className="block dark:text-gray-400">Username</label>
+          <label htmlFor="email" className="block dark:text-gray-400">Email</label>
             <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
           </div>
           <div className="space-y-1 text-sm">
-          <label for="password" className="block dark:text-gray-400">Password</label>
+          <label htmlFor="password" className="block dark:text-gray-400">Password</label>
             <input
               type="password"
               name="password"
@@ -41,6 +74,7 @@ const Login = () => {
               placeholder="Password"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
+            <h1 className="text-error">{wrong}</h1>
             <div className="flex justify-end text-xs dark:text-gray-400">
               <a rel="noopener noreferrer" href="#">
                 Forgot Password?
@@ -48,7 +82,7 @@ const Login = () => {
             </div>
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Sign Up</button>
+            <button className="btn btn-primary" type="submit">Sign In</button>
           </div>
         </form>
         <div className="flex items-center pt-4 space-x-1">
