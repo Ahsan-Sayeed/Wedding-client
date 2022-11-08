@@ -21,22 +21,22 @@ const Context = ({children}) => {
     },[]);
 
     const signInWithGoogle = () => {
-        
+        setLoading(true);
         return signInWithPopup(auth,googleAuthProvider);
     }
 
     const signInWitGit = () => {
-       
+        setLoading(true);
         return signInWithPopup(auth,gitHubAuthProvider)
     };
 
     const signInWithEmail = (email,password) =>{
-        
+        setLoading(true);
         return signInWithEmailAndPassword(auth,email,password);
     }
     
     const createUser = (email,password) =>{
-
+        setLoading(true);
         return createUserWithEmailAndPassword(auth,email,password)
     }
 
