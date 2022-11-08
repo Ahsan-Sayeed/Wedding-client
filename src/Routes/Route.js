@@ -8,9 +8,9 @@ import MyReviews from '../Pages/MyReviews/MyReviews';
 import NotFound from '../Pages/NotFound/NotFound';
 import Register from '../Pages/Register/Register';
 import ServiceDetails from '../Pages/ServiceDetails/ServiceDetails';
-import ServicePage from '../Pages/ServicePage/ServicePage';
 import ServicesPage from '../Pages/ServicesPage/ServicesPage';
 import PrivateRoute from './PrivateRoute';
+import AddService from '../Pages/AddService/AddService';
 
 const Route = createBrowserRouter([
     {
@@ -35,7 +35,7 @@ const Route = createBrowserRouter([
             },
             {
                 path:'/service',
-                element: <PrivateRoute><ServicePage/></PrivateRoute>
+                element: <PrivateRoute><AddService/></PrivateRoute>
             },
             {
                 path:'/services',

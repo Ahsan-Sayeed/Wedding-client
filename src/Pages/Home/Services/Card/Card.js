@@ -2,20 +2,21 @@ import React from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
 
-const Card = () => {
+const Card = ({value}) => {
+  const {title,email,price,imageUrl,fullDesc,shortDesc} = value;
   return (
     <div>
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure>
           <PhotoProvider>
             <PhotoView src="https://placeimg.com/400/225/arch">
-              <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+              <img src={imageUrl||"https://placeimg.com/400/225/arch"} alt="Shoes" />
             </PhotoView>
           </PhotoProvider>
         </figure>
         <div className="card-body">
           <div className="flex justify-between">
-            <h2 className="card-title">Shoes!</h2>
+            <h2 className="card-title">{title}</h2>
 
             <div className="flex items-center space-x-2 dark:text-yellow-500">
               <svg
@@ -30,11 +31,11 @@ const Card = () => {
           </div>
 
           <div className="flex">
-            <span className="text-3xl font-bold">$24</span>
-            <span className="text-xl dark:text-gray-400"> /mo</span>
+            <span className="text-3xl font-bold">${price}</span>
+            <span className="text-xl dark:text-gray-400"> /hr</span>
           </div>
 
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <p>{shortDesc}</p>
           <div className="card-actions justify-end">
             <div className="badge badge-outline btn btn-sm"><Link to="/services/1">View details</Link></div>
           </div>
