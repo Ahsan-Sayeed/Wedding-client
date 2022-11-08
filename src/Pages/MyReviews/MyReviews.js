@@ -1,9 +1,12 @@
 import React from "react";
+import Comments from "./Comments/Comments";
+import Pagination from "./Pagination/Pagination";
 
 const MyReviews = () => {
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+    <div className="flex lg:flex-row flex-col justify-center">
+      {/* ==first page== */}
+      <div className="flex flex-col max-w-5xl p-6 space-y-4 sm:p-10 dark:bg-gray-900 dark:text-gray-100">
         <h2 className="text-xl font-semibold">Your cart</h2>
         <ul className="flex flex-col divide-y divide-gray-700">
           <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
@@ -187,22 +190,41 @@ const MyReviews = () => {
             Not including taxes and shipping costs
           </p>
         </div>
-        <div className="flex justify-end space-x-4">
-          <button
-            type="button"
-            className="px-6 py-2 border rounded-md dark:border-violet-400"
-          >
-            Back
-            <span className="sr-only sm:not-sr-only">to shop</span>
-          </button>
-          <button
-            type="button"
-            className="px-6 py-2 border rounded-md dark:bg-violet-400 dark:text-gray-900 dark:border-violet-400"
-          >
-            <span className="sr-only sm:not-sr-only">Continue to</span>Checkout
-          </button>
+        <div className="flex justify-center space-x-4">
+          <Pagination></Pagination>
         </div>
       </div>
+      {/* first page */}
+      {/* ==second page== */}
+
+      <article className="max-w-5xl px-6 py-24 space-y-12 dark:bg-gray-800 dark:text-gray-50">
+        <div className="w-full mx-auto space-y-4 text-center">
+          <p className="text-xs font-semibold tracking-wider uppercase">
+            #TailwindCSS
+          </p>
+          <h1 className="text-4xl font-bold leading-tight md:text-5xl">
+            Interdum et malesuada fames ac ante ipsum primis in faucibus?
+          </h1>
+          <p className="text-sm dark:text-gray-400">
+            by
+            <a
+              rel="noopener noreferrer"
+              href="#"
+              target="_blank"
+              className="underline dark:text-violet-400"
+            >
+              <span itemprop="name">Leroy Jenkins</span>
+            </a>
+            on
+            <time datetime="2021-02-12 15:34:18-0200">Feb 12th 2021</time>
+          </p>
+        </div>
+        <div className="dark:text-gray-100">
+          <p>Insert the actual text content here...</p>
+        </div>
+        <Comments></Comments>
+      </article>
+      {/* second page */}
     </div>
   );
 };
