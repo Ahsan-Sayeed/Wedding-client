@@ -20,6 +20,7 @@ const ServiceDetails = () => {
   }, [insertedId]);
 
   // console.log(loaderData?.result)
+
   return (
     <div>
       <section className="dark:bg-gray-800 dark:text-gray-100">
@@ -45,6 +46,7 @@ const ServiceDetails = () => {
               <span className="text-xs dark:text-gray-400">
                 February 19, 2021
               </span>
+              <p>{data.shortDesc}</p>
               <p>{data.fullDesc}</p>
             </div>
           </a>
@@ -61,7 +63,7 @@ const ServiceDetails = () => {
 
           {user && user.uid ? (
             <div className="flex justify-center">
-              <InsertReview setInsertedId={setInsertedId}></InsertReview>
+              <InsertReview setInsertedId={setInsertedId} data={data}></InsertReview>
             </div>
           ) : (
             <div className="flex justify-center">

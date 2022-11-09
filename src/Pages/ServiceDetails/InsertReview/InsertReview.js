@@ -1,23 +1,35 @@
 import React, { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
 import { AuthContext } from "../../../Context/Context";
 
-const InsertReview = ({setInsertedId}) => {
+const InsertReview = ({ setInsertedId, data }) => {
   const {user} = useContext(AuthContext);
   const [check,setCheck] = useState(1);
+  const params = useParams();
 
   const handleSubmit = (e) =>{
     e.preventDefault();
     const message = e.target.message.value;
     const imageUrl = user.photoURL;
     const displayName = user.displayName;
-    const data = {email:user.email,imageUrl,displayName,message,rating:check};
-
+    const fulldata = {email:user.email,
+      imageUrl,
+      displayName,
+      message,
+      rating:check,
+      serviceId:params.id,
+      title:data.title,
+      price:data.price,
+      thum:data.imageUrl,
+      shortDesc:data.shortDesc
+    };
+    //name ,price, image ,short desc
         fetch('http://localhost:5000/review', {
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(fulldata),
         })
           .then((response) => response.json())
           .then((data) => {

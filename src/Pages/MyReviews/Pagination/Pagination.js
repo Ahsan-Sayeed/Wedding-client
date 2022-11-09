@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Pagination = () => {
+const Pagination = ({cardLength,setSkip}) => {
+  const [count,setCount] = useState(0);
   return (
     <div>
       <div className="flex justify-center items-center space-x-1 dark:text-gray-100">
@@ -20,13 +21,19 @@ const Pagination = () => {
           >
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
-        </button>
-        <button
-          type="button"
-          title="Page 1"
-          className="inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md dark:bg-gray-900 dark:text-violet-400 dark:border-violet-400"
-        >
-          1
+          {
+            [...Array(Math.ceil((cardLength/9)||0)).keys()].map(value=><button
+                type="button"
+                title="Page 1"
+                className="inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md dark:bg-gray-900 dark:text-violet-400 dark:border-violet-400"
+                key={value}
+                onClick={()=>{
+                    setCount(value*9)
+                    return setSkip(value*9)}}
+              >
+                {value+1}
+              </button>)
+        }
         </button>
         <button
           type="button"
@@ -35,20 +42,7 @@ const Pagination = () => {
         >
           2
         </button>
-        <button
-          type="button"
-          className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md dark:bg-gray-900 dark:border-gray-800"
-          title="Page 3"
-        >
-          3
-        </button>
-        <button
-          type="button"
-          className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md dark:bg-gray-900 dark:border-gray-800"
-          title="Page 4"
-        >
-          4
-        </button>
+
         <button
           title="next"
           type="button"

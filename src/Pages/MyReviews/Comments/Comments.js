@@ -1,6 +1,6 @@
 import React from "react";
 
-const Comments = () => {
+const Comments = ({value}) => {
   return (
     <div className="pt-12 border-t dark:border-gray-700">
       <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
@@ -10,13 +10,11 @@ const Comments = () => {
           className="self-center flex-shrink-0 w-24 h-24 border rounded-full md:justify-self-start dark:bg-gray-500 dark:border-gray-700"
         />
         <div className="flex flex-col w-full">
-          <h4 className="text-lg font-semibold">Leroy Jenkins</h4>
-          <p className="font-light text-xs"> November 4, 2022 |<span className="text-sky-400/100"> ★★★☆☆</span></p>   
+          <h4 className="text-lg font-semibold">{value.displayName}</h4>
+          <p className="font-light text-xs"> {value.date} |<span className="text-sky-400/100"> ★★★☆☆ {value.rating}</span></p>   
           
           <p className="dark:text-gray-400">
-            Sed non nibh iaculis, posuere diam vitae, consectetur neque. Integer
-            velit ligula, semper sed nisl in, cursus commodo elit. Pellentesque
-            sit amet mi luctus ligula euismod lobortis ultricies et nibh.
+            {value.message}
           </p>
           <textarea rows="3" placeholder="Message..." className="p-4 mt-2 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"></textarea>
         </div>
