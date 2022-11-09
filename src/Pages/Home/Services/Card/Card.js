@@ -3,7 +3,7 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
 
 const Card = ({value}) => {
-  const {title,email,price,imageUrl,fullDesc,shortDesc} = value;
+  const {_id,title,email,price,imageUrl,fullDesc,shortDesc} = value;
   return (
     <div>
       <div className="card w-96 bg-base-100 shadow-xl">
@@ -37,7 +37,7 @@ const Card = ({value}) => {
 
           <p>{shortDesc}</p>
           <div className="card-actions justify-end">
-            <div className="badge badge-outline btn btn-sm"><Link to="/services/1">View details</Link></div>
+            <div className="badge badge-outline btn btn-sm"><Link to={`/services/${_id}`}>View details</Link></div>
           </div>
         </div>
       </div>

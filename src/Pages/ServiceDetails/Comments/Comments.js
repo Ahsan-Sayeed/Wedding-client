@@ -1,6 +1,11 @@
 import React from "react";
 
-const Comments = () => {
+const Comments = ({value}) => {
+  // console.log(value);
+  // console.log(value.email.split("@")[0])
+ 
+
+  
   return (
     <div>
       <ul className="p-4 lg:p-8 dark:bg-gray-800 dark:text-gray-100">
@@ -16,21 +21,24 @@ const Comments = () => {
                     <img src="https://source.unsplash.com/100x100/?portrait" alt="" className="object-cover w-12 h-12 rounded-full dark:bg-gray-500 inline" />
                 </div>
                 <div className="mx-2">
-                    <span> Earum at ipsa aliquid quis, exercitationem est.</span><br />
-                    <span className="font-light text-xs"> November 4, 2022 |<span className="text-sky-400/100"> ★★★☆☆</span></span>   
+                    <span>{value.displayName||value.email.split("@")[0]}</span><br />
+                    <span className="font-light text-xs"> {value.date} |<span className="text-sky-400/100"> 
+                       ::{value.rating}::
+                       {
+                        [...Array(Math.ceil(value.rating)).keys()].map(value=>"★")
+                       }
+                       {[...Array(5-Math.ceil(value.rating)).keys()].map(value=>"☆")}
+                    </span></span>   
                 </div>
               </div>
               <time
                 dateTime=""
                 className="row-start-1 mb-1 md:col-start-1 xl:col-span-2 dark:text-gray-400"
               >
-                Oct 13, 2020
+                {value.date.split(" ").slice(1,4).join(" ")}
               </time>
               <p className="ml-8 md:col-start-2 md:col-span-4 xl:col-start-3 xl:col-span-9 md:ml-0 dark:text-gray-300">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Similique saepe exercitationem numquam, labore necessitatibus
-                deleniti quasi. Illo porro nihil necessitatibus debitis delectus
-                aperiam, fuga impedit assumenda odit, velit eveniet est.
+                {value.message}
               </p>
             </a>
           </article>

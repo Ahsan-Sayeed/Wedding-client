@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/Context";
+import Pagination from "../../Shared/Pagination/Pagination";
 import Services from "../Home/Services/Services";
 
 const AddService = () => {
   const { user } = useContext(AuthContext);
   const [card,setCard] = useState();
+  const [cardLength,setCardLength] = useState();
+  const [skip,setSkip] = useState(0);
   const [insertedId,setInsertedId] = useState();
 
   const handleSubmit = (e) => {
@@ -41,15 +44,17 @@ const AddService = () => {
   };
 
   useEffect(()=>{
-    fetch("http://localhost:5000/services/20")
+    fetch(`http://localhost:5000/services?limit=9&&skip=${skip}`)
       .then((response) => response.json())
       .then((data) => {
-       setCard(data);
+       setCard(data.result);
+       setCardLength(data.count);
       })
       .catch((error) => {
         console.error(error);
       });
-  },[insertedId])
+  },[insertedId,skip])
+
 
   return (
     <div>
@@ -155,6 +160,7 @@ const AddService = () => {
             <h1 className="text-4xl text-center">My services</h1>
             <Services card={card}/>
           </fieldset>
+        <Pagination cardLength={cardLength} setSkip={setSkip}/>
         </form>
       </section>
     </div>

@@ -9,10 +9,10 @@ import Services from "./Services/Services";
 const Home = () => {
   const [card,setCard] = useState();
   useEffect(()=>{
-    fetch("http://localhost:5000/services/3")
+    fetch("http://localhost:5000/services?limit=3")
       .then((response) => response.json())
       .then((data) => {
-       setCard(data);
+       setCard(data.result);
       })
       .catch((error) => {
         console.error(error);
