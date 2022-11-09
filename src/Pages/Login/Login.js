@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/Context";
+import useTitle from '../../Hooks/useTitle';
 
 const Login = () => {
   const {signInWithEmail,signInWithGoogle,signInWitGit} = useContext(AuthContext);
@@ -8,6 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const To = location?.state?.from || '/';
+  useTitle("Login");
 
   const handleSignIn = (e) =>{
     e.preventDefault();

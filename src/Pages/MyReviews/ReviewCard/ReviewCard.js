@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 
-const ReviewCard = ({value,setSelect,idx}) => {
+const ReviewCard = ({value,setSelect,idx,setStateChange,setEdit}) => {
     const handleRemove = (id) =>{
-        fetch(`http://localhost:5000/636b9c82df87a8082f4db552`, {
-            method: 'DELETE'
-          })
+        const confirm = window.confirm("Are you sure you want to delete?");
+        if(confirm){
+            fetch(`http://localhost:5000/review/${id}`, {
+                method: 'DELETE'
+              })
+              .then(res=>res.json())
+              .then(res=>{
+                if(res.deletedCount>0){
+                    setStateChange(id);
+                    setSelect(0);
+                    alert("Delete succesfull");
+                }
+              })
+              .catch(err=>{
+                console.log(err);
+              })
+        }
     }
   return (
     <li className={`flex flex-col py-6 sm:flex-row sm:justify-between hover:bg-gray-800 px-2 hover:rounded`} 
         onClick={()=>{
-            return setSelect(idx)
+            return setSelect(idx);
         }}>
       <div className="flex w-full space-x-2 sm:space-x-4">
         <img
@@ -54,6 +68,7 @@ const ReviewCard = ({value,setSelect,idx}) => {
             <button
               type="button"
               className="flex items-center px-2 py-1 space-x-1  hover:text-yellow-400"
+              onClick={()=>setEdit(true)}              
             >
                 <FiEdit />
               <span>Edit</span>

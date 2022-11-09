@@ -8,7 +8,7 @@ const Comments = ({value}) => {
   
   return (
     <div>
-      <ul className="p-4 lg:p-8 dark:bg-gray-800 dark:text-gray-100">
+      <ul className="p-4 lg:p-8 dark:bg-gray-800 dark:text-gray-100 rounded">
         <li>
           <article>
             <a

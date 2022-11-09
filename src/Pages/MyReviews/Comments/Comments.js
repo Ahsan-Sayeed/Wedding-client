@@ -1,25 +1,70 @@
 import React from "react";
 
-const Comments = ({value}) => {
+const Comments = ({ value, edit, setEdit, setStateChange }) => {
+  // console.log(value._id);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    fetch(`http://localhost:5000/review/${value._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ comment: e.target.comment.value }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.modifiedCount) {
+          alert("Comment Updated succesfully");
+          setStateChange(Math.random().toString());
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setEdit(false);
+  };
   return (
     <div className="pt-12 border-t dark:border-gray-700">
       <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
         <img
-          src="https://source.unsplash.com/75x75/?portrait"
+          src={value?.imageUrl || "https://source.unsplash.com/75x75/?portrait"}
           alt=""
           className="self-center flex-shrink-0 w-24 h-24 border rounded-full md:justify-self-start dark:bg-gray-500 dark:border-gray-700"
         />
         <div className="flex flex-col w-full">
-          <h4 className="text-lg font-semibold">{value.displayName}</h4>
-          <p className="font-light text-xs"> {value.date} |<span className="text-sky-400/100"> ★★★☆☆ {value.rating}</span></p>   
-          
-          <p className="dark:text-gray-400">
-            {value.message}
+          <h4 className="text-lg font-semibold">{value?.displayName}</h4>
+          <p className="font-light text-xs">
+            {" "}
+            {value?.date} |
+            <span className="text-sky-400/100">
+              ::{value.rating}::
+              {[...Array(Math.ceil(value.rating)).keys()].map((value) => "★")}
+              {[...Array(5 - Math.ceil(value.rating)).keys()].map(
+                (value) => "☆"
+              )}
+            </span>
           </p>
-          <textarea rows="3" placeholder="Message..." className="p-4 mt-2 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"></textarea>
+          {edit ? (
+            <form className="flex flex-col" onSubmit={handleSubmit}>
+              <textarea
+                rows="3"
+                placeholder="Message..."
+                name="comment"
+                defaultValue={value?.message}
+                className="p-4 mt-2 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"
+              ></textarea>
+              <button className="btn btn-blue" type="submit">
+                Done
+              </button>
+            </form>
+          ) : (
+            <p className="dark:text-gray-400">{value?.message}</p>
+          )}
         </div>
       </div>
-      <div className="flex justify-center pt-4 space-x-4 align-center">
+      {/* <div className="flex justify-center pt-4 space-x-4 align-center">
         <a
           rel="noopener noreferrer"
           href="#"
@@ -76,7 +121,7 @@ const Comments = ({value}) => {
             <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"></path>
           </svg>
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };

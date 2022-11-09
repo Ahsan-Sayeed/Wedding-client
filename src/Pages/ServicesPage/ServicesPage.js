@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "../../Shared/Pagination/Pagination";
 import Services from "../Home/Services/Services";
+import useTitle from '../../Hooks/useTitle';
 
 const ServicesPage = () => {
   const [card, setCard] = useState();
   const [cardLength,setCardLength] = useState();
   const [skip,setSkip] = useState(0);
-
+  useTitle('Services');
   useEffect(() => {
     fetch(`http://localhost:5000/services?limit=9&&skip=${skip}`)
       .then((response) => response.json())

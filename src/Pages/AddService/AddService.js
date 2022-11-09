@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/Context";
 import Pagination from "../../Shared/Pagination/Pagination";
 import Services from "../Home/Services/Services";
+import useTitle from '../../Hooks/useTitle';
 
 const AddService = () => {
   const { user } = useContext(AuthContext);
@@ -9,7 +10,8 @@ const AddService = () => {
   const [cardLength,setCardLength] = useState();
   const [skip,setSkip] = useState(0);
   const [insertedId,setInsertedId] = useState();
-
+  useTitle("Add Service");
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -33,6 +35,7 @@ const AddService = () => {
         if(data.acknowledged){
           form.reset();
           setInsertedId(data.insertedId);
+          alert("Service added succesfully");
         }
         else{
           alert('something went wrong');  

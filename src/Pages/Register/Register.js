@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/Context";
+import useTitle from '../../Hooks/useTitle';
 
 const Register = () => {
   const {createUser} = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const To = location?.state?.from || '/';
+  useTitle("Registration");
 
   const handleSignUp = (e) =>{
     e.preventDefault();

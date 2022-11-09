@@ -5,6 +5,7 @@ import FAQ from "./FAQ/FAQ";
 import Features from "./Features/Features";
 import GetUpdate from "./GetUpdate/GetUpdate";
 import Services from "./Services/Services";
+import useTitle from '../../Hooks/useTitle';
 
 const Home = () => {
   const [card,setCard] = useState();
@@ -19,6 +20,7 @@ const Home = () => {
       });
   },[])
 
+  useTitle("Home");
   return (
     <div>
       <Carousel></Carousel>

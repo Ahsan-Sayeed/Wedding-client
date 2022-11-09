@@ -6,7 +6,7 @@ const InsertReview = ({ setInsertedId, data }) => {
   const {user} = useContext(AuthContext);
   const [check,setCheck] = useState(1);
   const params = useParams();
-
+  
   const handleSubmit = (e) =>{
     e.preventDefault();
     const message = e.target.message.value;
@@ -21,7 +21,8 @@ const InsertReview = ({ setInsertedId, data }) => {
       title:data.title,
       price:data.price,
       thum:data.imageUrl,
-      shortDesc:data.shortDesc
+      shortDesc:data.shortDesc,
+      uid:user.uid
     };
     //name ,price, image ,short desc
         fetch('http://localhost:5000/review', {
