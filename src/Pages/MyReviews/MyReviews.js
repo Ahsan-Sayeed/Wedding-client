@@ -6,21 +6,33 @@ import Pagination from "./Pagination/Pagination";
 import ReviewCard from "./ReviewCard/ReviewCard";
 import useTitle from '../../Hooks/useTitle';
 import {AuthContext} from '../../Context/Context';
+import RemoveToken from "../../Utilities/RemoveToken";
 
 const MyReviews = () => {
   // const data = useLoaderData();
-  const {user} = useContext(AuthContext);
+  const {user,logOut} = useContext(AuthContext);
   // console.log(user.uid);
   const [select, setSelect] = useState(0);
   const [data, setData] = useState();
   const [stateChange, setStateChange] = useState();
   const [edit,setEdit] = useState(false);
 
-  useTitle("My Review")
+  useTitle("My Review");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/review/profile/${user.uid}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/review/profile?uid=${user.uid}&&Token=${document.cookie.split("=")[1]}`,{
+      headers:{
+        authorization: `Bearer ${document.cookie.split("=")[1]}`
+      }
+    })
+      .then((res) => {
+        if(res.status === 401 || res.status === 403){
+          RemoveToken();
+          logOut();
+          alert("You are logged out");
+        }  
+        return res.json();
+      })
       .then((res) => {
         setData(res);
       });

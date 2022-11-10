@@ -12,6 +12,7 @@ const AddService = () => {
   const [skip, setSkip] = useState(0);
   const [insertedId, setInsertedId] = useState();
   useTitle("Add Service");
+
   const notify = (value) =>
     toast.success(value, {
       position: "top-center",
@@ -33,8 +34,8 @@ const AddService = () => {
     const price = e.target.price.value;
     const shortDesc = e.target.shortDesc.value;
     const fullDesc = e.target.fullDesc.value;
-    const data = { imageUrl, title, email, price, shortDesc, fullDesc };
-
+    const data = { imageUrl, title, email, price, shortDesc, fullDesc,Token:document.cookie.split("=")[1] };
+    
     fetch("http://localhost:5000/services", {
       method: "POST", // or 'PUT'
       headers: {

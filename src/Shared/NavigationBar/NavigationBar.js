@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Context/Context";
+import RemoveToken from "../../Utilities/RemoveToken";
 
 const NavigationBar = () => {
   const {user,logOut} = useContext(AuthContext);
@@ -9,6 +10,7 @@ const NavigationBar = () => {
     logOut()
     .then(()=>{
       alert('succesfully logged out');
+      RemoveToken();
     })
     .catch(err=>{
       alert('something went wrong');

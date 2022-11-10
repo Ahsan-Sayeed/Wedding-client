@@ -2,15 +2,17 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/Context";
 import useTitle from '../../Hooks/useTitle';
+import SetToken from "../../Utilities/SetToken";
 
-const Login = () => {
+
+const Login = () => { 
   const {signInWithEmail,signInWithGoogle,signInWitGit} = useContext(AuthContext);
   const [wrong,setWrong] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const To = location?.state?.from || '/';
   useTitle("Login");
-
+  
   const handleSignIn = (e) =>{
     e.preventDefault();
     const email = e.target.email.value;
@@ -19,6 +21,7 @@ const Login = () => {
     .then(({user})=>{
       if(user&&user.uid){
         navigate(To,{replace:true});
+        SetToken(user.uid);
       }
       else{
         alert("please try again later");
@@ -40,7 +43,9 @@ const Login = () => {
     signInWithGoogle()
     .then(({user})=>{
       if(user&&user.uid){
+        alert('logged in')
         navigate(To,{replace:true});
+        SetToken(user.uid);
       }
       else{
         alert("please try again later");
@@ -48,6 +53,7 @@ const Login = () => {
     })
     .catch(err=>{
         alert("something went wrong please try agein later");
+        console.log(err)
     })
   }
 
@@ -56,6 +62,7 @@ const Login = () => {
     .then(({user})=>{
       if(user&&user.uid){
         navigate(To,{replace:true});
+        SetToken(user.uid);
       }
       else{
         alert("please try again later");

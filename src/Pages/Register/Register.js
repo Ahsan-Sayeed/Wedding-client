@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/Context";
 import useTitle from '../../Hooks/useTitle';
+import SetToken from "../../Utilities/SetToken";
 
 const Register = () => {
   const {createUser} = useContext(AuthContext);
@@ -19,6 +20,7 @@ const Register = () => {
       if(user&&user.uid){
         alert("account created succesfully");
         navigate(To,{replace:true});
+        SetToken(user.email);
       }
       else{
 

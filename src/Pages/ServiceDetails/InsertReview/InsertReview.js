@@ -22,7 +22,8 @@ const InsertReview = ({ setInsertedId, data }) => {
       price:data.price,
       thum:data.imageUrl,
       shortDesc:data.shortDesc,
-      uid:user.uid
+      uid:user.uid,
+      Token:document.cookie.split("=")[1]
     };
     //name ,price, image ,short desc
         fetch('http://localhost:5000/review', {
