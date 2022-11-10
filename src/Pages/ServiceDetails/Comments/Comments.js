@@ -4,7 +4,7 @@ const Comments = ({value}) => {
   // console.log(value);
   // console.log(value.email.split("@")[0])
  
-
+// console.log(value.imageUrl)
   
   return (
     <div>
@@ -18,7 +18,7 @@ const Comments = ({value}) => {
             >
               <div className="flex mb-1 ml-8 font-semibold md:col-start-2 md:col-span-4 md:ml-0 xl:col-start-3 xl:col-span-9">
                 <div>
-                    <img src="https://source.unsplash.com/100x100/?portrait" alt="" className="object-cover w-12 h-12 rounded-full dark:bg-gray-500 inline" />
+                    <img src={value.imageUrl||"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} alt="" className="object-cover w-12 h-12 rounded-full dark:bg-gray-500 inline" />
                 </div>
                 <div className="mx-2">
                     <span>{value.displayName||value.email.split("@")[0]}</span><br />

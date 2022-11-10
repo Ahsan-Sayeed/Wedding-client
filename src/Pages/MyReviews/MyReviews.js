@@ -6,6 +6,7 @@ import Pagination from "./Pagination/Pagination";
 import ReviewCard from "./ReviewCard/ReviewCard";
 import useTitle from '../../Hooks/useTitle';
 import {AuthContext} from '../../Context/Context';
+
 const MyReviews = () => {
   // const data = useLoaderData();
   const {user} = useContext(AuthContext);
@@ -86,6 +87,7 @@ const MyReviews = () => {
                 <Comments value={data?.result[select]} edit={edit} setEdit={setEdit} setStateChange={setStateChange}></Comments>
               </article>
               {/* second page */}
+              {/* <Modal/> */}
             </div>
           ) : (
             <div className="text-center text-5xl border rounded py-72">

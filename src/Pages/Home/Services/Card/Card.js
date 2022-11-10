@@ -9,7 +9,7 @@ const Card = ({value}) => {
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure>
           <PhotoProvider>
-            <PhotoView src="https://placeimg.com/400/225/arch">
+            <PhotoView src={imageUrl||"https://placeimg.com/400/225/arch"}>
               <img src={imageUrl||"https://placeimg.com/400/225/arch"} alt="Shoes" />
             </PhotoView>
           </PhotoProvider>
@@ -35,7 +35,7 @@ const Card = ({value}) => {
             <span className="text-xl dark:text-gray-400"> /hr</span>
           </div>
 
-          <p>{shortDesc}</p>
+          <p>{shortDesc.slice(0,100)+"..."}</p>
           <div className="card-actions justify-end">
             <div className="badge badge-outline btn btn-sm"><Link to={`/services/${_id}`}>View details</Link></div>
           </div>

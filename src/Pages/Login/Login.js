@@ -18,7 +18,6 @@ const Login = () => {
     signInWithEmail(email,password)
     .then(({user})=>{
       if(user&&user.uid){
-        alert('succesfully logged in');
         navigate(To,{replace:true});
       }
       else{
@@ -41,7 +40,6 @@ const Login = () => {
     signInWithGoogle()
     .then(({user})=>{
       if(user&&user.uid){
-        alert('succesfully logged in');
         navigate(To,{replace:true});
       }
       else{
@@ -57,7 +55,6 @@ const Login = () => {
     signInWitGit()
     .then(({user})=>{
       if(user&&user.uid){
-        alert('succesfully logged in');
         navigate(To,{replace:true});
       }
       else{

@@ -42,7 +42,7 @@ const ServiceDetails = () => {
                   {data.title}
                 </h3>
                 <p className="text-xs dark:text-gray-400">
-                <span>service by <a className="text-blue-600" href={"mailto:"+data.email}> @{data.email.split("@")[0]} </a></span>
+                <span>service by <a className="text-blue-600" href={"mailto:"+data.email}> @{data.email.split("@")[0]||"anonymous"} </a></span>
                 </p>
                 <p className="dark:text-gray-400">
                 <span className="text-sm dark:text-gray-400">service charge ${data.price}</span>

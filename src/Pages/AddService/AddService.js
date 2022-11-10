@@ -2,16 +2,28 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/Context";
 import Pagination from "../../Shared/Pagination/Pagination";
 import Services from "../Home/Services/Services";
-import useTitle from '../../Hooks/useTitle';
+import useTitle from "../../Hooks/useTitle";
+import { ToastContainer, toast } from "react-toastify";
 
 const AddService = () => {
   const { user } = useContext(AuthContext);
-  const [card,setCard] = useState();
-  const [cardLength,setCardLength] = useState();
-  const [skip,setSkip] = useState(0);
-  const [insertedId,setInsertedId] = useState();
+  const [card, setCard] = useState();
+  const [cardLength, setCardLength] = useState();
+  const [skip, setSkip] = useState(0);
+  const [insertedId, setInsertedId] = useState();
   useTitle("Add Service");
-  
+  const notify = (value) =>
+    toast.success(value, {
+      position: "top-center",
+      autoClose: 300,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -32,13 +44,12 @@ const AddService = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if(data.acknowledged){
+        if (data.acknowledged) {
           form.reset();
           setInsertedId(data.insertedId);
-          alert("Service added succesfully");
-        }
-        else{
-          alert('something went wrong');  
+          notify("Service added succesfully");
+        } else {
+          notify("something went wrong");
         }
       })
       .catch((error) => {
@@ -46,18 +57,17 @@ const AddService = () => {
       });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`http://localhost:5000/services?limit=9&&skip=${skip}`)
       .then((response) => response.json())
       .then((data) => {
-       setCard(data.result);
-       setCardLength(data.count);
+        setCard(data.result);
+        setCardLength(data.count);
       })
       .catch((error) => {
         console.error(error);
       });
-  },[insertedId,skip])
-
+  }, [insertedId, skip]);
 
   return (
     <div>
@@ -161,11 +171,23 @@ const AddService = () => {
           </fieldset>
           <fieldset className=" p-6 rounded-md shadow-sm dark:bg-gray-900">
             <h1 className="text-4xl text-center">My services</h1>
-            <Services card={card}/>
+            <Services card={card} />
           </fieldset>
-        <Pagination cardLength={cardLength} setSkip={setSkip}/>
+          <Pagination cardLength={cardLength} setSkip={setSkip} />
         </form>
       </section>
+      <ToastContainer
+        position="top-center"
+        autoClose={300}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

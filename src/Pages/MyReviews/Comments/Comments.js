@@ -1,30 +1,7 @@
 import React from "react";
+import EditReview from '../../../Shared/Modal/EditReview/EditReview';
 
 const Comments = ({ value, edit, setEdit, setStateChange }) => {
-  // console.log(value._id);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    fetch(`http://localhost:5000/review/${value._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ comment: e.target.comment.value }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.modifiedCount) {
-          alert("Comment Updated succesfully");
-          setStateChange(Math.random().toString());
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    setEdit(false);
-  };
   return (
     <div className="pt-12 border-t dark:border-gray-700">
       <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
@@ -46,22 +23,7 @@ const Comments = ({ value, edit, setEdit, setStateChange }) => {
               )}
             </span>
           </p>
-          {edit ? (
-            <form className="flex flex-col" onSubmit={handleSubmit}>
-              <textarea
-                rows="3"
-                placeholder="Message..."
-                name="comment"
-                defaultValue={value?.message}
-                className="p-4 mt-2 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"
-              ></textarea>
-              <button className="btn btn-blue" type="submit">
-                Done
-              </button>
-            </form>
-          ) : (
             <p className="dark:text-gray-400">{value?.message}</p>
-          )}
         </div>
       </div>
       {/* <div className="flex justify-center pt-4 space-x-4 align-center">
@@ -122,6 +84,10 @@ const Comments = ({ value, edit, setEdit, setStateChange }) => {
           </svg>
         </a>
       </div> */}
+      {
+        edit&&<EditReview value={value} setEdit={setEdit} setStateChange={setStateChange}></EditReview>
+      }
+      
     </div>
   );
 };
