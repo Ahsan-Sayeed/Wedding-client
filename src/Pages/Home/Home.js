@@ -10,7 +10,7 @@ import useTitle from '../../Hooks/useTitle';
 const Home = () => {
   const [card,setCard] = useState();
   useEffect(()=>{
-    fetch("http://localhost:5000/services?limit=3")
+    fetch("https://wedding-nine-steel.vercel.app/services?limit=3")
       .then((response) => response.json())
       .then((data) => {
        setCard(data.result);

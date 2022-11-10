@@ -9,6 +9,7 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const To = location?.state?.from || '/';
+  const changer = To==="/review"?"/":To;
   useTitle("Registration");
 
   const handleSignUp = (e) =>{
@@ -21,9 +22,9 @@ const Register = () => {
       if(user&&user.uid){
         updateUser(obj)
         .then(()=>{
-          alert("account created succesfully");
-          navigate(To,{replace:true});
           SetToken(user.email);
+          alert("account created succesfully");
+          navigate(changer,{replace:true});
         })
         .catch(err=>{
           console.log(err);
@@ -75,6 +76,7 @@ const Register = () => {
                   placeholder="email"
                   className="input input-bordered"
                   name="email"
+                  required
                 />
               </div>
               <div className="form-control">
@@ -86,6 +88,7 @@ const Register = () => {
                   placeholder="password"
                   className="input input-bordered"
                   name="password"
+                  required
                 />
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">

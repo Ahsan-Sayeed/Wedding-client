@@ -9,7 +9,7 @@ const ServicesPage = () => {
   const [skip,setSkip] = useState(0);
   useTitle('Services');
   useEffect(() => {
-    fetch(`http://localhost:5000/services?limit=9&&skip=${skip}`)
+    fetch(`https://wedding-nine-steel.vercel.app/services?limit=9&&skip=${skip}`)
       .then((response) => response.json())
       .then((data) => {
         setCard(data.result);

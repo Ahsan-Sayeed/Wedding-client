@@ -44,7 +44,7 @@ const Route = createBrowserRouter([
             {
                 path:'/services/:id',
                 element: <ServiceDetails/>,
-                loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+                loader: ({params}) => fetch(`https://wedding-nine-steel.vercel.app/services/${params.id}`)
             },
             {
                 path:'/review',

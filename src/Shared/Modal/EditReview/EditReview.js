@@ -17,7 +17,7 @@ const EditReview = ({ value, setEdit, setStateChange }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:5000/review/${value._id}`, {
+    fetch(`https://wedding-nine-steel.vercel.app/review/${value._id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",

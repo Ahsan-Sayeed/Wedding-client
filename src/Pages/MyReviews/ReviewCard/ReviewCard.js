@@ -18,7 +18,7 @@ const ReviewCard = ({ value, setSelect, idx, setStateChange, setEdit }) => {
   const handleRemove = (id) => {
     const confirm = window.confirm("Are you sure you want to delete?");
     if (confirm) {
-      fetch(`http://localhost:5000/review/${id}`, {
+      fetch(`https://wedding-nine-steel.vercel.app/review/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

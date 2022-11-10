@@ -26,7 +26,7 @@ const InsertReview = ({ setInsertedId, data }) => {
       Token:document.cookie.split("=")[1]
     };
     //name ,price, image ,short desc
-        fetch('http://localhost:5000/review', {
+        fetch('https://wedding-nine-steel.vercel.app/review', {
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',

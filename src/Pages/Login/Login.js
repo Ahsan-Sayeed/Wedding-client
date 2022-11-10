@@ -11,6 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const To = location?.state?.from || '/';
+  const changer = To==="/review"?"/":To;
   useTitle("Login");
   
   const handleSignIn = (e) =>{
@@ -20,8 +21,8 @@ const Login = () => {
     signInWithEmail(email,password)
     .then(({user})=>{
       if(user&&user.uid){
-        navigate(To,{replace:true});
         SetToken(user.uid);
+        navigate(changer,{replace:true});
       }
       else{
         alert("please try again later");
@@ -43,8 +44,7 @@ const Login = () => {
     signInWithGoogle()
     .then(({user})=>{
       if(user&&user.uid){
-        alert('logged in')
-        navigate(To,{replace:true});
+        navigate(changer,{replace:true});
         SetToken(user.uid);
       }
       else{
@@ -61,7 +61,7 @@ const Login = () => {
     signInWitGit()
     .then(({user})=>{
       if(user&&user.uid){
-        navigate(To,{replace:true});
+        navigate(changer,{replace:true});
         SetToken(user.uid);
       }
       else{

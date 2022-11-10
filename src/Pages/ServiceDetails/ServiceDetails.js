@@ -14,7 +14,7 @@ const ServiceDetails = () => {
   useTitle("Service Details");
   
   useEffect(() => {
-    fetch(`http://localhost:5000/review/${data._id}`)
+    fetch(`https://wedding-nine-steel.vercel.app/review/${data._id}`)
       .then((response) => response.json())
       .then((data) => {
         setLoaderData(data);

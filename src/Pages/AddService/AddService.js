@@ -36,7 +36,7 @@ const AddService = () => {
     const fullDesc = e.target.fullDesc.value;
     const data = { imageUrl, title, email, price, shortDesc, fullDesc,Token:document.cookie.split("=")[1] };
     
-    fetch("http://localhost:5000/services", {
+    fetch("https://wedding-nine-steel.vercel.app/services", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const AddService = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/services?limit=9&&skip=${skip}`)
+    fetch(`https://wedding-nine-steel.vercel.app/services?limit=9&&skip=${skip}`)
       .then((response) => response.json())
       .then((data) => {
         setCard(data.result);

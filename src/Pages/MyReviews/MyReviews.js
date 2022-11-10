@@ -1,25 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import Comments from "./Comments/Comments";
-import Pagination from "./Pagination/Pagination";
 import ReviewCard from "./ReviewCard/ReviewCard";
 import useTitle from "../../Hooks/useTitle";
 import { AuthContext } from "../../Context/Context";
 import RemoveToken from "../../Utilities/RemoveToken";
 
 const MyReviews = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut,loading } = useContext(AuthContext);
   const [select, setSelect] = useState(0);
   const [data, setData] = useState();
   const [stateChange, setStateChange] = useState();
   const [edit, setEdit] = useState(false);
 
   useTitle("My Review");
+// console.log(loading);
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/review/profile?uid=${user.uid}&&Token=${
+      `https://wedding-nine-steel.vercel.app/review/profile?uid=${user.uid}&&Token=${
         document.cookie.split("=")[1]
       }`,
       {
@@ -29,6 +28,7 @@ const MyReviews = () => {
       }
     )
       .then((res) => {
+        console.log(res.status);
         if (res.status === 401 || res.status === 403) {
           RemoveToken();
           logOut();
