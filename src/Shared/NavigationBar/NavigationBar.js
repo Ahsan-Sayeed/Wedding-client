@@ -19,7 +19,7 @@ const NavigationBar = () => {
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          daisyUI
+          PhotoWala
         </Link>
       </div>
       <div className="flex-none hidden md:block">
