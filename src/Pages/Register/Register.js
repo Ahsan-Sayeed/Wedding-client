@@ -5,7 +5,7 @@ import useTitle from '../../Hooks/useTitle';
 import SetToken from "../../Utilities/SetToken";
 
 const Register = () => {
-  const {createUser} = useContext(AuthContext);
+  const {createUser,updateUser} = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const To = location?.state?.from || '/';
@@ -15,12 +15,19 @@ const Register = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const obj = {displayName:e.target.username.value||"Anynomus"} 
     createUser(email,password)
     .then(({user})=>{
       if(user&&user.uid){
-        alert("account created succesfully");
-        navigate(To,{replace:true});
-        SetToken(user.email);
+        updateUser(obj)
+        .then(()=>{
+          alert("account created succesfully");
+          navigate(To,{replace:true});
+          SetToken(user.email);
+        })
+        .catch(err=>{
+          console.log(err);
+        })
       }
       else{
 
@@ -47,6 +54,18 @@ const Register = () => {
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form className="card-body" onSubmit={handleSignUp}>
+            <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Username</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  className="input input-bordered"
+                  name="username"
+                />
+              </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>

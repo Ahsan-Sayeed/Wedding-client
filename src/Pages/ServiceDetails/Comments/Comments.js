@@ -1,11 +1,6 @@
 import React from "react";
 
 const Comments = ({value}) => {
-  // console.log(value);
-  // console.log(value.email.split("@")[0])
- 
-// console.log(value.imageUrl)
-  
   return (
     <div>
       <ul className="p-4 lg:p-8 dark:bg-gray-800 dark:text-gray-100 rounded">

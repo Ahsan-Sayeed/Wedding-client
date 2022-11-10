@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 const Pagination = ({cardLength,setSkip}) => {
-    // const lgt = [...Array(Math.ceil((cardLength/9)||0)).keys()].length;
-    // console.log(count);
     return (
     <div>
       <div className="flex justify-center space-x-1 dark:text-gray-100">

@@ -21,8 +21,6 @@ const ServiceDetails = () => {
       });
   }, [insertedId]);
 
-  // console.log(loaderData?.result)
-  console.log(data);
   return (
     <div>
       <section className="dark:bg-gray-800 dark:text-gray-100">

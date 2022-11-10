@@ -4,33 +4,36 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 import Comments from "./Comments/Comments";
 import Pagination from "./Pagination/Pagination";
 import ReviewCard from "./ReviewCard/ReviewCard";
-import useTitle from '../../Hooks/useTitle';
-import {AuthContext} from '../../Context/Context';
+import useTitle from "../../Hooks/useTitle";
+import { AuthContext } from "../../Context/Context";
 import RemoveToken from "../../Utilities/RemoveToken";
 
 const MyReviews = () => {
-  // const data = useLoaderData();
-  const {user,logOut} = useContext(AuthContext);
-  // console.log(user.uid);
+  const { user, logOut } = useContext(AuthContext);
   const [select, setSelect] = useState(0);
   const [data, setData] = useState();
   const [stateChange, setStateChange] = useState();
-  const [edit,setEdit] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   useTitle("My Review");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/review/profile?uid=${user.uid}&&Token=${document.cookie.split("=")[1]}`,{
-      headers:{
-        authorization: `Bearer ${document.cookie.split("=")[1]}`
+    fetch(
+      `http://localhost:5000/review/profile?uid=${user.uid}&&Token=${
+        document.cookie.split("=")[1]
+      }`,
+      {
+        headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
+        },
       }
-    })
+    )
       .then((res) => {
-        if(res.status === 401 || res.status === 403){
+        if (res.status === 401 || res.status === 403) {
           RemoveToken();
           logOut();
           alert("You are logged out");
-        }  
+        }
         return res.json();
       })
       .then((res) => {
@@ -39,9 +42,9 @@ const MyReviews = () => {
   }, [stateChange]);
 
   useEffect(() => {
-     setEdit(false);
-  }, [select])
-  
+    setEdit(false);
+  }, [select]);
+
   return (
     <>
       {data === undefined ? (
@@ -96,7 +99,12 @@ const MyReviews = () => {
                 <div className="dark:text-gray-100">
                   <p>{data?.result[select]?.shortDesc}</p>
                 </div>
-                <Comments value={data?.result[select]} edit={edit} setEdit={setEdit} setStateChange={setStateChange}></Comments>
+                <Comments
+                  value={data?.result[select]}
+                  edit={edit}
+                  setEdit={setEdit}
+                  setStateChange={setStateChange}
+                ></Comments>
               </article>
               {/* second page */}
               {/* <Modal/> */}

@@ -5,7 +5,6 @@ import RemoveToken from "../../Utilities/RemoveToken";
 
 const NavigationBar = () => {
   const {user,logOut} = useContext(AuthContext);
-  console.log(user);
   const handleLogOut = () =>{
     logOut()
     .then(()=>{
